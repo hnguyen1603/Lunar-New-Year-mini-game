@@ -1,112 +1,253 @@
+"use client";
+import { Gluten } from "next/font/google";
 import Image from "next/image";
 
+import { Card } from "antd";
+import { useEffect, useState } from "react";
+import styles from "./style.module.css";
+const { Meta } = Card;
+const gluten = Gluten({
+  weight: ["100", "900"],
+  subsets: ["latin"],
+});
+type Card = {
+  id: string;
+  value: string;
+  unbox: boolean
+};
+
+
 export default function Home() {
+  const [id, setId] = useState("");
+  const [reveal, setReveal] = useState(false);
+  const [card, setCard] = useState<Card[]>([
+    {
+      id: "1",
+      value: "100 d",
+      unbox: false
+    },
+    {
+      id: "2",
+      value: "100 d",
+      unbox: false
+    },
+    {
+      id: "3",
+      value: "200 do",
+      unbox: false
+    },
+    {
+      id: "4",
+      value: "120 do",
+      unbox: false
+    },
+    {
+      id: "5",
+      value: "120 do",
+      unbox: false
+    },
+    {
+      id: "6",
+      value: "120 do",
+      unbox: false
+    },
+  ])
+  const onClick = (e: React.MouseEvent<HTMLElement>, item: Card) => {
+    if (item.unbox) {
+      return;
+    }
+    const id = (e.target as HTMLButtonElement).id;
+    // console.log(id);
+    const tempData = [...card];
+    console.log("id",parseInt(id));
+    console.log("run",tempData[parseInt(id) - 1]);
+
+    tempData[parseInt(id) - 1].unbox = true;
+    setCard(tempData);
+    setReveal(true);
+    // console.log((e.target as HTMLButtonElement).id, item);
+  };
+ 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main
+      style={{
+        backgroundImage: "linear-gradient(180deg, #f8c7a5, #e17b71)",
+        opacity: "0.7",
+        zIndex: "1",
+      }}
+      className={`h-screen flex items-center justify-center ${gluten.className}`}
+    >
+      <div className=" grid grid-cols-3 justify-items-center relative ">
+        <div
+          style={
+            reveal
+              ? {
+                  transform: "rotateY(180deg)",
+                  transformStyle: "preserve-3d",
+                  transition: "visibility, opacity 0.6s, transform 1s 1.2s",
+                  backgroundImage: "none",
+                  transitionTimingFunction:
+                    " cubic-bezier(.175, .885, .32, 1.275)",
+                  zIndex: "3",
+                }
+              : {}
+          }
+          className={`fixed bottom-1/4 m-4 w-[400px] h-[400px] flex items-center ${
+            reveal ? `visible ` : `invisible opacity-0`
+          }`}
+        >
+          <p
+            className={`text-4xl text-black font-semibold absolute inset-y-1/4 ${
+              styles.congratText
+            } ${reveal ? styles.congratTextShow : ``}`}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+
+            500 dong
+          </p>
+          <button
+            className={`${styles.buttonAccept} ${
+              reveal ? styles.buttonAcceptShow : ``
+            }`}
+            onClick = {() => {
+              setReveal(false);
+            }}
+          >
+           Bạn có hài lòng không?
+          </button>
+          <Image
+          
+            fill={true}
+            className={`rounded-2xl absolute`}
+            style={{
+              boxShadow: "30px 30px 30px rgba(0, 0, 0, 0.4)",
+              flex: "1",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+              zIndex: "1",
+            }}
+            src="/center card.jpg"
+            alt="Picture of the author"
+          ></Image>
+
+          <Image
+            fill={true}
+            className={`rounded-2xl`}
+            style={{
+              boxShadow: "30px 30px 30px rgba(0, 0, 0, 0.4)",
+              flex: "1",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              zIndex: "1",
+            }}
+            src="/rong vang.jpg"
+            alt="Picture of the author"
+          ></Image>
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          className={`${styles.card}`}
+          onClick={(event) => onClick(event, card[0])}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          {" "}
+          <div id="1" className={` ${styles.rotate3DRightF}`}>
+            <p className={`${styles.innerText}`}>Thử vận may</p>
+            <Image
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+              fill={true}
+              id="1"
+              className={`text-2xl ${styles.cardImage} `}
+              src="/rong vang.jpg"
+              alt="Picture of the author"
+            ></Image>
+          </div>
+          <div id="1" className={` ${styles.rotate3DRightB}`}>
+            <p className={`${styles.innerText} `}>Cùng bốc nào!</p>
+          </div>
+          
+        </div>
+        <div
+          className={`${styles.card} ${styles.scale}`}
+          onClick={(event) => onClick(event, card[1])}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <Image
+            fill={true}
+            id={card[1].id}
+            className={`${styles.cardImage} ${styles.scaleF}`}
+            src="/rong vang.jpg"
+            alt="Picture of the author"
+          ></Image>
+          <p className={`${styles.scaleB}`}>Mời bạn</p>
+        </div>
+        <div
+          className={`${styles.card} ${styles.rotateX3}`}
+          onClick={(event) => onClick(event, card[2])}
+        >
+          <Image
+            fill={true}
+            id={card[2].id}
+            className={`${styles.cardImage} ${styles.rotateXF3}`}
+            src="/rong vang.jpg"
+            alt="Picture of the author"
+          ></Image>
+          <Image
+            fill={true}
+            id={card[2].id}
+            className={`${styles.cardImage} ${styles.rotateXB3}`}
+            src="/cat image.jpg"
+            alt="Picture of the author"
+          ></Image>
+        </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div
+          className={`${styles.card} ${styles.rotateInfinite}`}
+          onClick={(event) => onClick(event, card[3])}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+          <Image
+            fill={true}
+            id={card[3].id}
+            className={`${styles.cardImage}  `}
+            style={{ zIndex: "1" }}
+            src="/rong vang.jpg"
+            alt="Picture of the author"
+          ></Image>
+          <p className={`${styles.showText}`}>Tiền đêiii</p>
+        </div>
+        <div
+          className={`${styles.card}`}
+          onClick={(event) => onClick(event, card[4])}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          <Image
+            fill={true}
+            id={card[4].id}
+            className={`${styles.cardImage} ${styles.rotate360}`}
+            src="/rong vang.jpg"
+            alt="Picture of the author"
+          ></Image>
+         
+          <div className={styles.test}>
+            
+            <p className={`${styles.rotateText}`}>Lì xì nè!!!</p>
+          </div>
+        </div>
+        <div
+        
+          className={`${styles.card} ${styles.rotateX}`}
+          onClick={(event) => onClick(event, card[5])}
+        >
+         
+         <Image
+            fill={true}
+            id={card[5].id}
+            className={`${styles.cardImage} ${styles.rotateXF}`}
+            src="/rong vang.jpg"
+            alt="Picture of the author"
+          ></Image>
+          <div id = "6" className={styles.rotateXB}> 
+            <p  className={`${styles.showText}`}>Lì xì nè!!!</p>
+           
+          </div>
+        </div>
       </div>
     </main>
   );
