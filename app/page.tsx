@@ -90,7 +90,7 @@ export default function Home() {
         {card.map((element) => {
           const col = element.col;
           const colStart = "col-start-" + col;
-          console.log(colStart)
+          console.log(colStart);
 
           return (
             <div
@@ -192,7 +192,7 @@ export default function Home() {
 
       {/* MODAL */}
       <div
-        className={`fixed bottom-1/3 left-1/3 m-4 w-[400px] h-[400px] flex items-center 
+        className={`fixed top-[40%] left-1/2 mt-[-200px] ml-[-200px] w-[400px] h-[400px] 
         ${styles.modal}
         ${modal ? styles.modalOpen : ``}`}
       >
@@ -220,13 +220,13 @@ export default function Home() {
         ></Image>
       </div>
       <div
-        style={{ left: "40%", bottom: "15%", zIndex: "3", width: "15%" }}
-        className={`fixed flex ${styles.buttonAccept} ${
-          modal ? styles.buttonAcceptShow : ``
-        }`}
+        style={{ zIndex: "3", width: "200px" }}
+        className={`fixed bottom-[15%] left-1/2 ml-[-100px] text-center ${
+          styles.buttonAccept
+        } ${modal ? styles.buttonAcceptShow : ``}`}
       >
         <button
-          className="flex-1"
+          className=""
           onClick={() => {
             handleModal(currentItem as Card);
           }}

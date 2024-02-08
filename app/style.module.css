@@ -20,7 +20,7 @@
 .congratText {
   z-index: 3;
   opacity: 0;
-  transition:opacity 1.5s ease 2s;
+  transition: opacity 1.5s ease 2s;
   visibility: hidden;
 }
 .congratTextShow {
@@ -30,20 +30,17 @@
 
 .buttonAccept {
   z-index: 4;
-  left: 40%;
+
   opacity: 0;
   transition: opacity 1.5s ease 2s;
   font-size: 1.5rem;
   color: white;
   background-image: linear-gradient(180deg, #f8c7a5, #e17b71);
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-radius: 1rem;
   visibility: hidden;
- 
 }
 
 .buttonAcceptShow {
@@ -55,7 +52,7 @@
   transition: opacity 3s ease 1s;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   opacity: 0;
-  z-index: 2;
+  z-index: 3;
   visibility: hidden;
 }
 
