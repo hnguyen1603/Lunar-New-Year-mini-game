@@ -2,7 +2,7 @@
 import { Gluten } from "next/font/google";
 import Image from "next/image";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 const gluten = Gluten({
@@ -20,6 +20,7 @@ type Card = {
 export default function Home() {
   const [modal, setModalOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<Card>();
+
   const [card, setCard] = useState<Card[]>([
     {
       id: "1",
@@ -29,31 +30,31 @@ export default function Home() {
     },
     {
       id: "2",
-      value: "100 d",
+      value: "200 d",
       unbox: false,
       col: "3",
     },
     {
       id: "3",
-      value: "200 do",
+      value: "300 do",
       unbox: false,
       col: "4",
     },
     {
       id: "4",
-      value: "120 do",
+      value: "400 do",
       unbox: false,
       col: "2",
     },
     {
       id: "5",
-      value: "120 do",
+      value: "500 do",
       unbox: false,
       col: "3",
     },
     {
       id: "6",
-      value: "120 do",
+      value: "600 do",
       unbox: false,
       col: "4",
     },
@@ -62,9 +63,9 @@ export default function Home() {
     if (item.unbox) {
       return;
     }
-
     // const id = (e.target as HTMLButtonElement).id;
     setCurrentItem(item);
+    // console.log(item);
     setModalOpen(true);
   };
 
@@ -72,8 +73,6 @@ export default function Home() {
     setModalOpen(false);
     const tempData = [...card];
     tempData[parseInt(item.id) - 1].unbox = true;
-    randomizeArray(tempData);
-    console.log(tempData);
     setCard(tempData);
   };
 
@@ -101,15 +100,22 @@ export default function Home() {
           styles.background
         } ${modal ? `${styles.blur}` : ``}`}
       >
-        {card.map((element) => {
-          const col = element.col;
-          const colStart = "col-start-" + col;
-          console.log(colStart);
+        {card.map((element, index) => {
+          let colStart = index + 2;
+          switch (index) {
+            case 3:
+              colStart = index - 1;
+            case 4:
+              colStart = index - 1;
+            case 5:
+              colStart = index - 1;
+          }
 
           return (
             <div
+              style={{ gridColumnStart: colStart }}
               key={element.id}
-              className={`${colStart} ${styles.card}`}
+              className={`${styles.card}`}
               onClick={(event) => onClick(event, element)}
             >
               <Image
@@ -122,86 +128,6 @@ export default function Home() {
             </div>
           );
         })}
-        {/* <>
-          <div
-            // key={element.id}
-            className={`col-start-2 ${styles.card}`}
-            // onClick={(event) => onClick(event, element)}
-          >
-            <Image
-              fill={true}
-              // id={element.id}
-              className={`text-2xl ${styles.cardImage} `}
-              src={`/rong vang.jpg`}
-              alt="Picture of the author"
-            ></Image>
-          </div>
-          <div
-            // key={element.id}
-            className={`col-start-3 ${styles.card}`}
-            // onClick={(event) => onClick(event, element)}
-          >
-            <Image
-              fill={true}
-              // id={element.id}
-              className={`text-2xl ${styles.cardImage} `}
-              src={`/rong vang.jpg`}
-              alt="Picture of the author"
-            ></Image>
-          </div>
-          <div
-            // key={element.id}
-            className={`col-start-4 ${styles.card}`}
-            // onClick={(event) => onClick(event, element)}
-          >
-            <Image
-              fill={true}
-              // id={element.id}
-              className={`text-2xl ${styles.cardImage} `}
-              src={`/rong vang.jpg`}
-              alt="Picture of the author"
-            ></Image>
-          </div>
-          <div
-            // key={element.id}
-            className={`col-start-2 ${styles.card}`}
-            // onClick={(event) => onClick(event, element)}
-          >
-            <Image
-              fill={true}
-              // id={element.id}
-              className={`text-2xl ${styles.cardImage} `}
-              src={`/rong vang.jpg`}
-              alt="Picture of the author"
-            ></Image>
-          </div>
-          <div
-            // key={element.id}
-            className={`col-start-3 ${styles.card}`}
-            // onClick={(event) => onClick(event, element)}
-          >
-            <Image
-              fill={true}
-              // id={element.id}
-              className={`text-2xl ${styles.cardImage} `}
-              src={`/rong vang.jpg`}
-              alt="Picture of the author"
-            ></Image>
-          </div>
-          <div
-            // key={element.id}
-            className={`col-start-4 ${styles.card}`}
-            // onClick={(event) => onClick(event, element)}
-          >
-            <Image
-              fill={true}
-              // id={element.id}
-              className={`text-2xl ${styles.cardImage} `}
-              src={`/rong vang.jpg`}
-              alt="Picture of the author"
-            ></Image>
-          </div>
-        </> */}
       </div>
 
       {/* MODAL */}
