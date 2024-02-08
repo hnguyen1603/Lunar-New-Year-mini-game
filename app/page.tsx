@@ -197,7 +197,7 @@ export default function Home() {
         ${modal ? styles.modalOpen : ``}`}
       >
         <p
-          className={`text-3xl text-black font-semibold absolute left-1/3 ${
+          className={`text-3xl text-black font-semibold absolute left-1/3 top-[40%] ${
             styles.congratText
           } ${modal ? styles.congratTextShow : ``}`}
         >
