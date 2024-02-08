@@ -72,9 +72,23 @@ export default function Home() {
     setModalOpen(false);
     const tempData = [...card];
     tempData[parseInt(item.id) - 1].unbox = true;
+    randomizeArray(tempData);
+    console.log(tempData);
     setCard(tempData);
   };
 
+  const randomizeArray = (tempData: Card[]) => {
+    let index = tempData.length;
+    let randomIndex;
+    while (index != 0) {
+      randomIndex = Math.floor(Math.random() * index);
+      index--;
+      [tempData[index], tempData[randomIndex]] = [
+        tempData[randomIndex],
+        tempData[index],
+      ];
+    }
+  };
   return (
     <main className={gluten.className}>
       {/* CARDS */}
@@ -83,7 +97,7 @@ export default function Home() {
           backgroundImage: "linear-gradient(180deg, #f8c7a5, #e17b71)",
           zIndex: "1",
         }}
-        className={`h-screen items-center justify-center grid grid-cols-5 relative opacity-70 ${
+        className={`h-screen items-center justify-center justify-items-center grid grid-cols-5 relative opacity-70 ${
           styles.background
         } ${modal ? `${styles.blur}` : ``}`}
       >
@@ -197,7 +211,7 @@ export default function Home() {
         ${modal ? styles.modalOpen : ``}`}
       >
         <p
-          className={`text-3xl text-black font-semibold absolute left-1/3 top-[40%] ${
+          className={`text-4xl text-black font-semibold absolute left-1/2 ml-[-25%] top-[40%] ${
             styles.congratText
           } ${modal ? styles.congratTextShow : ``}`}
         >
@@ -205,9 +219,7 @@ export default function Home() {
         </p>
 
         <Image
-          // fill={true}
-          width={400}
-          height={400}
+          fill={true}
           className={`rounded-2xl absolute `}
           style={{
             boxShadow: "30px 30px 30px rgba(0, 0, 0, 0.4)",
