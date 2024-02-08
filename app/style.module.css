@@ -17,234 +17,22 @@
   z-index: 1;
 }
 
-/* CARD 1 */
-.rotate3DRightB,
-.rotate3DRightF {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-  backface-visibility: hidden;
-  z-index: 1;
-}
-
-.rotate3DRightB {
-  background: linear-gradient(180deg, #cedce7, #d2c7cd, #d5babe);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotateY(180deg);
-}
-
-.rotate3DRightF {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotateY(0deg);
-}
-
-.innerText {
-  transform: translateY(-50%) translateZ(60px) scale(0.94);
-  z-index: 2;
-  outline: 1px solid transparent;
-  -webkit-perspective: inherit;
-  perspective: inherit;
-  backface-visibility: hidden;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-.card:hover .rotate3DRightF {
-  transform: rotateY(-180deg);
-}
-
-.card:hover .rotate3DRightB {
-  transform: rotateY(0deg);
-}
-
-.rotate3DRightF .innerText p {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  position: relative;
-}
-.rotate3DRightF .innerText p:after {
-  content: "";
-  width: 4rem;
-  height: 2px;
-  position: absolute;
-  background: #c6d4df;
-  display: block;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  bottom: -0.75rem;
-}
-
-/* CARD 2 */
-
-.scale {
-  transition: transform 1s ease;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.scaleB {
-  opacity: 0;
-  transition: opacity 2s ease;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 2;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-.scale:hover .scaleB {
-  opacity: 0.9;
-}
-.scale:hover {
-  transform: scale(1.1);
-}
-
-/* CARD 3 */
-.rotateX3 {
-  transform-style: preserve-3d;
-  perspective: 600px;
-  transition: 0.6s;
-}
-
-.rotateXF3 {
-  backface-visibility: hidden;
-  transform: rotate3d(1, 1, 0, 0deg);
-  transition: 1s cubic-bezier(0.5, 1.3, 0.5, 1.3);
-}
-
-.rotateXB3 {
-  backface-visibility: hidden;
-  transform: rotate3d(1, 1, 0, -180deg);
-  transition: 1s cubic-bezier(0.5, 1.3, 0.5, 1.3);
-}
-.rotateX3:hover .rotateXF3 {
-  transform: rotate3d(1, 1, 0, -180deg);
-}
-
-.rotateX3:hover .rotateXB3 {
-  transform: rotate3d(1, 1, 0, 0deg);
-}
-
-/* CARD 4 */
-.rotateInfinite {
-  transition: transform 1.5s;
-  transition-delay: 0.2s;
-  transition-timing-function: ease, cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.rotateInfinite:hover {
-  transform: rotate(-720deg) scale(1.1);
-  transform-style: preserve-3d;
-}
-
-.showText {
-  transition: opacity 2s ease-in-out;
-  opacity: 0;
-  z-index: 2;
-  font-weight: 600;
-  font-size: 2rem;
-  line-height: 2rem;
-  z-index: 3;
-}
-
-.rotateInfinite:hover .showText {
-  opacity: 1;
-}
-
-/* CARD 5 */
-.rotate360 {
-    z-index: 2;
-  transition: transform ease 1s, opacity ease 1s;
-}
-
-.rotate360:hover {
-  transform: rotate(360deg);
-  transform-style: preserve-3d;
-  opacity: 0;
-}
-
-.rotateText {
-  font-weight: 600;
-  font-size: 2rem;
-  line-height: 2rem;
-  z-index: 1;
-  opacity: 1;
-  transition: opacity ease 1s;
-}
-
-
-.test {
-  background-image: linear-gradient(180deg, #cedce7, #d2c7cd, #d5babe);
-  width: 100%;
-  height: 100%;
-  opacity: 0.9;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-/* CARD 6 */
-.rotateX {
-  transform-style: preserve-3d;
-  perspective: 600px;
-  transition: 0.6s;
-}
-
-.rotateXF {
-  backface-visibility: hidden;
-  transform: rotateX(0deg);
-  transition: 1s cubic-bezier(0.5, 1.3, 0.5, 1.3);
-}
-
-.rotateXB {
-  background-image: linear-gradient(180deg, #cedce7, #d2c7cd, #d5babe);
-  backface-visibility: hidden;
-  transform: rotateX(180deg);
-  transition: 1s cubic-bezier(0.5, 1.3, 0.5, 1.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-.rotateX:hover .rotateXF {
-  transform: rotateX(-180deg);
-}
-
-.rotateX:hover .rotateXB {
-  transform: rotateX(0deg);
-}
-
-.rotateX:hover .showText {
-  opacity: 0.9;
-}
-
 .congratText {
   z-index: 3;
-  transform: rotateY(180deg);
   opacity: 0;
-  transition: 1.5s ease 2s;
+  transition:opacity 1.5s ease 2s;
+  visibility: hidden;
 }
 .congratTextShow {
   opacity: 0.9;
+  visibility: visible;
 }
 
 .buttonAccept {
   z-index: 4;
-  transform: rotateY(180deg);
+  left: 40%;
   opacity: 0;
-  transition: 1.5s ease 3s;
+  transition: opacity 1.5s ease 2s;
   font-size: 1.5rem;
   color: white;
   background-image: linear-gradient(180deg, #f8c7a5, #e17b71);
@@ -254,8 +42,32 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-radius: 1rem;
+  visibility: hidden;
+ 
 }
 
 .buttonAcceptShow {
   opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  transition: opacity 3s ease 1s;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.modalOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.background {
+  transition: filter 1s ease 0.2s;
+}
+
+.blur {
+  filter: blur(4px);
 }
